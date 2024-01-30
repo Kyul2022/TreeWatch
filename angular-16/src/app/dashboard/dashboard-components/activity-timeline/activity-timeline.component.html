@@ -1,0 +1,75 @@
+<mat-card>
+    <mat-tab-group #tabGroup mat-stretch-tabs="false">
+        <!-- Tab 1 -->
+        <mat-tab label="Plant">
+            <mat-card-content>
+
+
+                <div class="d-flex no-blcok" *ngFor='let plant of plants'>
+                    <div class="m-r-20">
+                        <div id="circle" style="width: 100px; height: 100px; -webkit-border-radius: 25px; -moz-border-radius: 25px; border-radius: 25px;background: {{plant.image}};"></div>
+                    </div> 
+                    <div class="p-b-20 b-b m-b-30">
+                        <h4 class="m-0">{{plant.name}}
+                            <small class="text-muted">({{plant.description}})</small>
+                        </h4>
+                        <p class="text-muted">Niveau d'eau : {{plant.waterLevel}}</p>
+                        <p class="text-muted">Niveau d'humudité : {{plant.soilMoistureLevel}}</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-tab>
+        <!-- End Tab 1 -->
+        <!-- Tab 2 -->
+        <mat-tab label="Add a plant">
+            <mat-card-content>
+                <mat-card-title>Fill in the following in order to register a plant</mat-card-title>
+                <!-- ============================================================== -->
+                <!-- column -->
+                <!-- ============================================================== -->
+                <form class="basic-form" (ngSubmit)="onSubmit()" #plantForm="ngForm" method="post">
+                    <div class="row">
+                        <!-- column -->
+                        <div class="col-12">
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="Your plant's name" [(ngModel)]="plant.name" name="name" >
+                            </mat-form-field>
+                        </div>
+                        <!-- column -->
+                        <div class="col-12">
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="A small description" [(ngModel)]="plant.description" type="text" name="description">
+                            </mat-form-field>
+                        </div>
+                        <!-- column -->
+                        <div class="col-12">
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="Which colour represent your plant" [(ngModel)]="plant.image" type="text" name="image">
+                            </mat-form-field>
+                        </div>
+
+                        <!-- column -->
+                        <div class="col-12">
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="Water threshold value" [(ngModel)]="plant.waterThreshold" type="number" name="waterThreshold">
+                            </mat-form-field>
+                        </div>
+
+                        <!-- column -->
+                        <div class="col-12">
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="Soil moisture threshold value" [(ngModel)]="plant.soilThreshold" type="number" name="soilThreshold">
+                            </mat-form-field>
+                        </div>
+
+                        <!-- column -->
+                        <div class="col-12">
+                            <button type="submit" [disabled]="!plantForm.form.valid" 
+                            class="btn btn-info">Submit</button>                        
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>
